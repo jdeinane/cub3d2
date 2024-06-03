@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 17:15:48 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/02 19:33:08 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:10:44 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void set_player_position(t_cub3d *game, int x, int y, char direction)
 		game->player.dir_x = 1;
 		game->player.dir_y = 0;
 		game->player.plane_x = 0;
-		game->player.plane_y = 0.66;
+		game->player.plane_y = 0.66; 
 	}
 	game->map[y][x] = '0';
 }
@@ -67,58 +67,92 @@ static void init_player_position(t_cub3d *game)
 		if (found)
 			break;
 	}
-
 	if (!found)
 		error_exit(game, "Error: No initial player position set in the map");
 }
 
-void parse_line(t_cub3d *game, char *line)
+static void parse_line(t_cub3d *game, char *line, int *textures_parsed, int *colors_parsed)
 {
 	if (line[0] == '\0')
-		return; // Skip empty lines
+		return;
 
 	if (line[0] == 'N' && line[1] == 'O')
+	{
+		if (textures_parsed[0])
+			error_exit(game, "Error: Duplicate NO texture definition");
 		parse_textures(game, line);
+		textures_parsed[0] = 1;
+	}
 	else if (line[0] == 'S' && line[1] == 'O')
+	{
+		if (textures_parsed[1])
+			error_exit(game, "Error: Duplicate SO texture definition");
 		parse_textures(game, line);
+		textures_parsed[1] = 1;
+	}
 	else if (line[0] == 'W' && line[1] == 'E')
+	{
+		if (textures_parsed[2])
+			error_exit(game, "Error: Duplicate WE texture definition");
 		parse_textures(game, line);
+		textures_parsed[2] = 1;
+	}
 	else if (line[0] == 'E' && line[1] == 'A')
+	{
+		if (textures_parsed[3])
+			error_exit(game, "Error: Duplicate EA texture definition");
 		parse_textures(game, line);
+		textures_parsed[3] = 1;
+	}
 	else if (line[0] == 'F')
+	{
+		if (colors_parsed[0])
+			error_exit(game, "Error: Duplicate floor color definition");
 		parse_color(&game->floor_color, line);
+		colors_parsed[0] = 1;
+	}
 	else if (line[0] == 'C')
+	{
+		if (colors_parsed[1])
+			error_exit(game, "Error: Duplicate ceiling color definition");
 		parse_color(&game->ceiling_color, line);
+		colors_parsed[1] = 1;
+	}
 	else
-		parse_map(game, line); // Treat it as a map line
+	{
+		parse_map(game, line);
+	}
 }
 
 void parse_file(t_cub3d *game, const char *filename)
 {
-    int fd;
-    char *line;
-    int ret;
+	int fd;
+	char *line;
+	int ret;
+	int textures_parsed[4] = {0, 0, 0, 0}; // NO, SO, WE, EA
+	int colors_parsed[2] = {0, 0};		   // F, C
 
-    fd = open(filename, O_RDONLY);
-    if (fd < 0)
-        error_exit(game, "Error: Error opening file");
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		error_exit(game, "Error: Error opening file");
 
-    while ((ret = get_next_line(fd, &line)) > 0)
-    {
-        parse_line(game, line);
-        free(line);
-    }
-    if (ret >= 0 && line != NULL) // Ensure the last line is processed
-    {
-        parse_line(game, line);
-        free(line);
-    }
-    close(fd);
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		parse_line(game, line, textures_parsed, colors_parsed);
+		free(line);
+	}
+	if (ret >= 0 && line != NULL)
+	{
+		parse_line(game, line, textures_parsed, colors_parsed);
+		free(line);
+	}
+	close(fd);
 
-    // Validate the map after parsing all lines
-    validate_map_walls(game);
+	if (!(textures_parsed[0] && textures_parsed[1] && textures_parsed[2] && textures_parsed[3]))
+		error_exit(game, "Error: Missing one or more texture definitions");
+	if (!(colors_parsed[0] && colors_parsed[1]))
+		error_exit(game, "Error: Missing floor or ceiling color definition");
 
-    // Initialize player position after validation
-    init_player_position(game);
-
+	validate_map_walls(game);
+	init_player_position(game);
 }

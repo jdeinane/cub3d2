@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/02 18:21:43 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 14:10:33 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,9 @@ void	parse_color(t_color *color, char *line);
 void	parse_map(t_cub3d *game, char *line);
 void	parse_args(int ac, char **av);
 void 	validate_map_walls(t_cub3d *game);
+
 // EVENTS
-int handle_keypress(int keycode, t_cub3d *game);
+int		handle_keypress(int keycode, t_cub3d *game);
 int		handle_keyrelease(int keycode, t_cub3d *game);
 
 // RAYCASTING
@@ -173,7 +174,6 @@ void	free_resources(t_cub3d *game);
 int		is_within_bounds(t_cub3d *game, double x, double y);
 
 // GNL
-char	*recurs(int depth, int *ret, int fd);
 int		get_next_line(int fd, char **line);
 
 // LIBFT
