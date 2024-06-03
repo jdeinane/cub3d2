@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 17:30:14 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/02 19:35:59 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 12:37:34 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void parse_textures(t_cub3d *game, char *line)
 		free_tokens(tokens);
 		error_exit(game, "Error: Unknown texture identifier");
 	}
-	game->textures[texture_index].img = mlx_xpm_file_to_image(game->mlx, tokens[1],
-															  &game->textures[texture_index].width, &game->textures[texture_index].height);
 	if (!game->textures[texture_index].img)
 	{
 		free_tokens(tokens);
