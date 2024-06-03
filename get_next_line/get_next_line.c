@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 04:00:46 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/03 12:45:59 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 13:00:18 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static char	*handle_end_of_line(char *buffer, int depth, int *ret)
 	char	*line;
 	int		i;
 
-	i = 0;
 	line = malloc(sizeof(char) * (depth + 1));
 	if (!line)
 	{
 		*ret = -1;
 		return (NULL);
 	}
+	i = 0;
 	while (i < depth)
 	{
 		line[i] = buffer[i];
@@ -39,10 +39,9 @@ int	get_next_line(int fd, char **line)
 	int		depth;
 	int		ret;
 
-	depth = 0;
-	ret = read(fd, &buffer[depth], 1);
 	*line = NULL;
-	while (ret > 0)
+	depth = 0;
+	while ((ret = read(fd, &buffer[depth], 1)) > 0)
 	{
 		if (buffer[depth] == '\n')
 			break ;

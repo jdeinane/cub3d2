@@ -6,13 +6,13 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 17:43:46 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/02 17:43:55 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 13:00:54 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-char *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	while ((*s != '\0') && (*s != c))
 	{
@@ -22,5 +22,5 @@ char *ft_strchr(const char *s, int c)
 	{
 		return ((char *)s);
 	}
-	return ((char *)NULL);
+	return ((char *) NULL);
 }
