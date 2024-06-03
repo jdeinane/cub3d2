@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 17:15:48 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/03 15:35:31 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 15:51:27 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,16 @@ static void init_player_position(t_cub3d *game)
 		error_exit(game, "Error: No initial player position set in the map");
 }
 
+static char *trim_leading_whitespace(char *line)
+{
+	while (*line == ' ' || *line == '\t')
+		line++;
+	return line;
+}
+
 static void parse_line(t_cub3d *game, char *line, int *textures_parsed, int *colors_parsed)
 {
+	line = trim_leading_whitespace(line);
 	if (line[0] == '\0')
 		return;
 
