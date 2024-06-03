@@ -6,7 +6,7 @@
 #    By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 17:17:38 by jubaldo           #+#    #+#              #
-#    Updated: 2024/06/02 17:44:13 by jubaldo          ###   ########.fr        #
+#    Updated: 2024/06/03 17:02:04 by jubaldo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS		=	events/handle_keypress.c 	\
 				libft/ft_strncmp.c \
 				libft/ft_strcmp.c \
 				libft/ft_strchr.c \
+				libft/ft_putendl_fd.c \
 				parsing/parse_args.c \
 				parsing/parse_color.c \
 				parsing/parse_file.c \
