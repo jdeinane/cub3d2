@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:04:56 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/02 19:43:52 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 13:45:51 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static char **allocate_new_map_lines(t_cub3d *game, char **map_lines, int map_he
         free(map_lines);
     return (new_map_lines);
 }
+
 static bool is_valid_map_line(const char *line, int *player_count)
 {
 	bool valid = true;
@@ -57,6 +58,7 @@ static bool is_valid_map_line(const char *line, int *player_count)
 		valid = false;
 	return valid && (*player_count <= 1);
 }
+
 void parse_map(t_cub3d *game, char *line)
 {
     static char **map_lines = NULL;

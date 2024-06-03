@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 17:30:14 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/03 12:37:34 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 13:45:31 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,24 @@ static int	get_texture_index(char *id)
 	else if (ft_strncmp(id, "EA", 2) == 0)
 		return (3);
 	return (-1);
+}
+
+static void load_texture(t_cub3d *game, char *path, int index)
+{
+	game->textures[index].img = mlx_xpm_file_to_image(game->mlx, path, &game->textures[index].width, &game->textures[index].height);
+	if (!game->textures[index].img)
+	{
+		printf("Failed to load texture: %s\n", path);
+		perror("mlx_xpm_file_to_image");
+		error_exit(game, "Error: Texture not loaded");
+	}
+
+	game->textures[index].data = (int *)mlx_get_data_addr(game->textures[index].img, &game->textures[index].bpp, &game->textures[index].size_line, &game->textures[index].endian);
+	if (!game->textures[index].data)
+	{
+		perror("mlx_get_data_addr");
+		error_exit(game, "Error: Failed to get texture data");
+	}
 }
 
 void parse_textures(t_cub3d *game, char *line)
@@ -43,19 +61,8 @@ void parse_textures(t_cub3d *game, char *line)
 		free_tokens(tokens);
 		error_exit(game, "Error: Unknown texture identifier");
 	}
-	if (!game->textures[texture_index].img)
-	{
-		free_tokens(tokens);
-		error_exit(game, "Error: Failed to load texture");
-	}
 
-	game->textures[texture_index].data = (int *)mlx_get_data_addr(
-		game->textures[texture_index].img, &game->textures[texture_index].bpp,
-		&game->textures[texture_index].size_line, &game->textures[texture_index].endian);
-	if (!game->textures[texture_index].data)
-	{
-		free_tokens(tokens);
-		error_exit(game, "Error: Failed to get texture data");
-	}
+	load_texture(game, tokens[1], texture_index);
+
 	free_tokens(tokens);
 }

@@ -6,40 +6,11 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 22:05:24 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/05/31 14:37:23 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 13:41:58 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-static void	init_textures(t_cub3d *game, char *texture_paths[])
-{
-	int	i;
-
-	i = 0;
-	while (i < NUM_TEXTURES)
-	{
-		game->textures[i].img = mlx_xpm_file_to_image(game->mlx, \
-			texture_paths[i], &game->textures[i].width, \
-			&game->textures[i].height);
-		if (game->textures[i].img == NULL)
-		{
-			printf("Failed to load texture: %s\n", texture_paths[i]);
-			perror("mlx_xpm_file_to_image");
-			error_exit(game, "Error: Texture not loaded");
-		}
-		game->textures[i].data = (int *)mlx_get_data_addr \
-			(game->textures[i].img, &game->textures[i].bpp, \
-			&game->textures[i].size_line, \
-			&game->textures[i].endian);
-		if (game->textures[i].data == NULL)
-		{
-			perror("mlx_get_data_addr");
-			error_exit(game, "Error: Failed to get texture data");
-		}
-		i++;
-	}
-}
 
 static void	init_colors(t_cub3d *game)
 {
@@ -69,7 +40,6 @@ void	init_cub3d(t_cub3d *game)
 	game->win_width = WIN_WIDTH;
 	game->win_height = WIN_HEIGHT;
 	init_mlx(game);
-	init_textures(game, texture_paths);
 	init_colors(game);
 	game->map = NULL;
 	game->map_width = 0;
