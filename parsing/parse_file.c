@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 17:15:48 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/03 14:10:44 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 15:35:31 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,13 +129,12 @@ void parse_file(t_cub3d *game, const char *filename)
 	int fd;
 	char *line;
 	int ret;
-	int textures_parsed[4] = {0, 0, 0, 0}; // NO, SO, WE, EA
-	int colors_parsed[2] = {0, 0};		   // F, C
+	int textures_parsed[4] = {0, 0, 0, 0};
+	int colors_parsed[2] = {0, 0};
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		error_exit(game, "Error: Error opening file");
-
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		parse_line(game, line, textures_parsed, colors_parsed);
@@ -147,12 +146,10 @@ void parse_file(t_cub3d *game, const char *filename)
 		free(line);
 	}
 	close(fd);
-
 	if (!(textures_parsed[0] && textures_parsed[1] && textures_parsed[2] && textures_parsed[3]))
 		error_exit(game, "Error: Missing one or more texture definitions");
 	if (!(colors_parsed[0] && colors_parsed[1]))
 		error_exit(game, "Error: Missing floor or ceiling color definition");
-
-	validate_map_walls(game);
+	validate_map(game);
 	init_player_position(game);
 }

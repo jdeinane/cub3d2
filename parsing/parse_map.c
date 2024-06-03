@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:04:56 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/03 13:45:51 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 15:22:30 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,18 @@ static bool is_valid_map_line(const char *line, int *player_count)
 
 	while (*line)
 	{
-		if (!ft_strchr("01NSEW ", *line)) // Allow space as a valid character
+		if (!ft_strchr("01NSEW ", *line))
 		{ 
 			valid = false;
-			break;
+			break ;
 		}
 		if (ft_strchr("NSEW", *line))
 			(*player_count)++;
 		line++;
 	}
-
 	if (*player_count > 1)
 		valid = false;
-	return valid && (*player_count <= 1);
+	return (valid && (*player_count <= 1));
 }
 
 void parse_map(t_cub3d *game, char *line)
