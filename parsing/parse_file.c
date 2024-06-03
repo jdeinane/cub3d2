@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 17:15:48 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/03 17:05:15 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 18:59:27 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,10 +180,8 @@ void parse_file(t_cub3d *game, const char *filename)
 		error_exit(game, "Error: Missing one or more texture definitions");
 	if (!(colors_parsed[0] && colors_parsed[1]))
 		error_exit(game, "Error: Missing floor or ceiling color definition");
-
 	if (!parsing_map)
 		error_exit(game, "Error: No map data found");
-
 	validate_map(game);
 	init_player_position(game);
 }
