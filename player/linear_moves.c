@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 21:56:07 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/01 22:11:53 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/03 13:07:34 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,35 +42,46 @@ void	move_backward(t_cub3d *game, double move_speed)
 		game->player.pos_y = new_pos_y;
 }
 
-void move_left(t_cub3d *game, double move_speed)
+void	move_left(t_cub3d *game, double move_speed)
 {
-	double move_x = game->player.plane_x * move_speed;
-	double move_y = game->player.plane_y * move_speed;
+	double	move_x;
+	double	move_y;
 
-	if (is_within_bounds(game, game->player.pos_x - move_x, game->player.pos_y) &&
-		game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x - move_x)] == '0')
+	move_x = game->player.plane_x * move_speed;
+	move_y = game->player.plane_y * move_speed;
+	if (is_within_bounds(game, game->player.pos_x - \
+		move_x, game->player.pos_y) && game->map[(int)(game->player.pos_y)] \
+			[(int)(game->player.pos_x - move_x)] == '0')
 	{
 		game->player.pos_x -= move_x;
 	}
-	if (is_within_bounds(game, game->player.pos_x, game->player.pos_y - move_y) &&
-		game->map[(int)(game->player.pos_y - move_y)][(int)(game->player.pos_x)] == '0')
+	if (is_within_bounds(game, game->player.pos_x, \
+		game->player.pos_y - move_y) && \
+		game->map[(int)(game->player.pos_y - move_y)] \
+		[(int)(game->player.pos_x)] == '0')
 	{
 		game->player.pos_y -= move_y;
 	}
 }
 
-void move_right(t_cub3d *game, double move_speed)
+void	move_right(t_cub3d *game, double move_speed)
 {
-	double move_x = game->player.plane_x * move_speed;
-	double move_y = game->player.plane_y * move_speed;
+	double	move_x;
+	double	move_y;
 
-	if (is_within_bounds(game, game->player.pos_x + move_x, game->player.pos_y) &&
-		game->map[(int)(game->player.pos_y)][(int)(game->player.pos_x + move_x)] == '0')
+	move_x = game->player.plane_x * move_speed;
+	move_y = game->player.plane_y * move_speed;
+	if (is_within_bounds(game, game->player.pos_x + \
+		move_x, game->player.pos_y) && \
+		game->map[(int)(game->player.pos_y)] \
+		[(int)(game->player.pos_x + move_x)] == '0')
 	{
 		game->player.pos_x += move_x;
 	}
-	if (is_within_bounds(game, game->player.pos_x, game->player.pos_y + move_y) &&
-		game->map[(int)(game->player.pos_y + move_y)][(int)(game->player.pos_x)] == '0')
+	if (is_within_bounds(game, game->player.pos_x, \
+		game->player.pos_y + move_y) && \
+		game->map[(int)(game->player.pos_y + move_y)] \
+		[(int)(game->player.pos_x)] == '0')
 	{
 		game->player.pos_y += move_y;
 	}
