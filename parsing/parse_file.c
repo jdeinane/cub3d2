@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 17:15:48 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/04 12:32:04 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/04 15:07:22 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void parse_line(t_cub3d *game, char *line, int *textures_parsed, int *col
 	if (line[0] == 'N' && line[1] == 'O')
 	{
 		if (textures_parsed[0])
-			error_exit(game, "Error: Duplicate NO texture definition");
+			error_exit2(game, "Error: Duplicate NO texture definition", line);
 		parse_textures(game, line);
 		textures_parsed[0] = 1;
 	}
@@ -126,7 +126,7 @@ static void parse_line(t_cub3d *game, char *line, int *textures_parsed, int *col
 		colors_parsed[1] = 1;
 	}
 	else
-		error_exit(game, "Error: Invalid map configuration");
+		error_exit2(game, "Error: Invalid map configuration", line);
 }
 
 void parse_file(t_cub3d *game, const char *filename)
@@ -148,7 +148,6 @@ void parse_file(t_cub3d *game, const char *filename)
 		{
 			parsing_map = 1;
 		}
-		free(line);
 		if (parsing_map)
 		{
 			parse_map(game, line);

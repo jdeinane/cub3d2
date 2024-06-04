@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/03 17:01:56 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/04 14:33:49 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,8 @@ void	update_player(t_cub3d *game);
 
 // UTILS
 void	error_exit(t_cub3d *game, const char *msg);
-int		handle_exit(t_cub3d *game);
+void 	error_exit2(t_cub3d *game, const char *msg, char *line_to_free);
+int 	handle_exit(t_cub3d *game);
 void	clean_exit(t_cub3d *game);
 void	free_tokens(char **tokens);
 void	free_resources(t_cub3d *game);
