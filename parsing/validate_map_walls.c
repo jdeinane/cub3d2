@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 12:38:07 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/03 16:57:05 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 15:06:05 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,7 @@ static int is_rectangular_map(t_cub3d *game)
 	for (int y = 1; y < game->map_height; y++)
 	{
 		if ((int)ft_strlen(game->map[y]) != width)
-		{
 			return 0;
-		}
 	}
 	return 1;
 }
@@ -113,11 +111,7 @@ static int is_rectangular_map(t_cub3d *game)
 void validate_map(t_cub3d *game)
 {
 	if (is_rectangular_map(game))
-	{
 		validate_rectangular_map(game);
-	}
 	else
-	{
 		validate_non_rectangular_map(game);
-	}
 }

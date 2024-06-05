@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 12:02:46 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 15:13:48 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
-# define PATH_NORTH "./textures/north_texture.xpm"
-# define PATH_SOUTH "./textures/south_texture.xpm"
-# define PATH_EAST "./textures/east_texture.xpm"
-# define PATH_WEST "./textures/west_texture.xpm"
+# define PATH_NORTH "./textures/test/north.xpm"
+# define PATH_SOUTH "./textures/test/south.xpm"
+# define PATH_EAST "./textures/test/east.xpm"
+# define PATH_WEST "./textures/test/west.xpm"
 
 typedef struct s_color {
 	int	r;
