@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 19:16:22 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 17:42:00 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 19:27:22 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	game_loop(t_cub3d *game)
 	return (0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_cub3d game;
+	t_cub3d	game;
 
 	ft_memset(&game, 0, sizeof(t_cub3d));
 	parse_args(ac, av);
