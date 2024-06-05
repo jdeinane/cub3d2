@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 18:48:29 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 19:26:52 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,12 +138,12 @@ void	init_cub3d(t_cub3d *game);
 void	parse_file(t_cub3d *game, const char *filename);
 void	parse_textures(t_cub3d *game, char *line);
 void	parse_color(t_cub3d *game, char *line);
-void 	parse_map(t_cub3d *game, char *line);
+void	parse_map(t_cub3d *game, char *line);
 void	parse_args(int ac, char **av);
-void 	validate_map(t_cub3d *game);
+void	validate_map(t_cub3d *game);
 
 // EVENTS
-int 	handle_keypress(int keycode, t_cub3d *game);
+int		handle_keypress(int keycode, t_cub3d *game);
 int		handle_keyrelease(int keycode, t_cub3d *game);
 
 // RAYCASTING
@@ -169,8 +169,8 @@ void	update_player(t_cub3d *game);
 
 // UTILS
 void	error_exit(t_cub3d *game, const char *msg);
-void 	error_exit2(t_cub3d *game, const char *msg, char *line_to_free);
-int 	handle_exit(t_cub3d *game);
+void	error_exit2(t_cub3d *game, const char *msg, char *line_to_free);
+int		handle_exit(t_cub3d *game);
 void	clean_exit(t_cub3d *game);
 void	free_tokens(char **tokens);
 void	free_resources(t_cub3d *game);
@@ -188,7 +188,7 @@ int		ft_atoi(const char *str);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 char	*ft_strdup(const char *s);
 int		ft_strlen(char const *s);
-int 	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strchr(const char *s, int c);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_strtok_r(char *str, const char *delim, char **saveptr);
