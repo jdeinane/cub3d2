@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 18:04:32 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 18:48:29 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <string.h>
+# include <limits.h>
+# include <ctype.h>
 
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
@@ -190,5 +192,6 @@ int 	ft_strcmp(const char *s1, const char *s2);
 char	*ft_strchr(const char *s, int c);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_strtok_r(char *str, const char *delim, char **saveptr);
+long	ft_strtol(const char *str, char **endptr, int base);
 
 #endif

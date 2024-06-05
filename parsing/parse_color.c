@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:01:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 18:11:14 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 18:45:49 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,21 @@ static int validate_rgb_component(char *component)
 	char *endptr;
 
 	if (*component == '\0')
-		return -1;
+		return (-1);
 
-	value = strtol(component, &endptr, 10);
+	value = ft_strtol(component, &endptr, 10);
 	if (*endptr != '\0' || value < 0 || value > 255)
-		return -1;
+		return (-1);
 
-	return value;
+	return (value);
 }
 
 void parse_color(t_cub3d *game, char *line)
 {
-	char **rgb;
-	int r, g, b;
+	char	**rgb;
+	int		r;
+	int		g;
+	int		b;
 
 	if (!line || (line[0] != 'F' && line[0] != 'C'))
 		error_exit(game, "Error: Invalid color line format");
