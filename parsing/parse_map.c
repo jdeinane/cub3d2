@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:04:56 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/04 14:20:57 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 11:59:04 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void parse_map(t_cub3d *game, char *line)
 		return;
 
 	if (!is_valid_map_line(line, &player_count))
-		error_exit(game, "Error: Invalid map characters or multiple player start positions");
-
+		error_exit2(game, "Error: Invalid map characters or multiple player start positions", \
+			line);
 	new_map_lines = allocate_new_map_lines(game, map_lines, map_height);
 	add_line_to_map(game, new_map_lines, line, map_height);
 	map_lines = new_map_lines;

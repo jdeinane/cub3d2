@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 17:30:14 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 11:52:59 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 12:06:41 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,17 @@ static void load_texture(t_cub3d *game, char *path, int index, char *line)
 
 void parse_textures(t_cub3d *game, char *line)
 {
-	char	**tokens;
-	int		texture_index;
+	char	*token;
+	char	*rest = line;
 
-	tokens = ft_split(line, ' ');
-	if (!tokens || !tokens[1])
-	{
-		free_tokens(tokens);
+		token = ft_strtok_r(rest, " ", &rest);
+	if (!token)
 		error_exit2(game, "Error: Invalid texture path", line);
-	}
-	texture_index = get_texture_index(tokens[0]);
+	int texture_index = get_texture_index(token);
 	if (texture_index == -1)
-	{
-		free_tokens(tokens);
 		error_exit2(game, "Error: Unknown texture identifier", line);
-	}
-	load_texture(game, tokens[1], texture_index, line);
-	free_tokens(tokens);
+	token = ft_strtok_r(NULL, " ", &rest);
+	if (!token)
+		error_exit2(game, "Error: Invalid texture path", line);
+	load_texture(game, token, texture_index, line);
 }

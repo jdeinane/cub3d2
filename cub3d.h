@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/04 16:40:31 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 12:02:46 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,5 +189,6 @@ int		ft_strlen(char const *s);
 int 	ft_strcmp(const char *s1, const char *s2);
 char	*ft_strchr(const char *s, int c);
 void	ft_putendl_fd(char *s, int fd);
+char	*ft_strtok_r(char *str, const char *delim, char **saveptr);
 
 #endif
