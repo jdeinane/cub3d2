@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 16:10:23 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/05/30 00:50:22 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 19:50:49 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,4 @@ void	init_game(t_cub3d *game)
 					&game->size_line, &game->endian);
 	if (!game->img_data)
 		error_exit(game, "Error: Error getting image data");
-	init_player(game);
 }

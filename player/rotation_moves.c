@@ -6,13 +6,13 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 22:03:23 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 19:24:46 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 19:52:43 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	rotate_right(t_cub3d *game, double rot_speed)
+void	rotate_left(t_cub3d *game, double rot_speed)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -29,7 +29,7 @@ void	rotate_right(t_cub3d *game, double rot_speed)
 							game->player.plane_y * cos(-rot_speed);
 }
 
-void	rotate_left(t_cub3d *game, double rot_speed)
+void	rotate_right(t_cub3d *game, double rot_speed)
 {
 	double	old_dir_x;
 	double	old_plane_x;

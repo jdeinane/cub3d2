@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 19:26:52 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 19:50:55 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ typedef struct s_cub3d {
 
 // INIT
 void	init_game(t_cub3d *game);
-void	init_player(t_cub3d *game);
 void	init_cub3d(t_cub3d *game);
 
 // PARSING
