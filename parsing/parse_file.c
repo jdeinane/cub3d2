@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 17:15:48 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 18:11:54 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 18:20:14 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ static void parse_line(t_cub3d *game, char *line, int *textures_parsed, int *col
 		colors_parsed[1] = 1;
 	}
 	else
-		error_exit(game, "Error: Invalid map configuration");
+		error_exit2(game, "Error: Invalid map configuration", line);
 }
 
 void parse_file(t_cub3d *game, const char *filename)
