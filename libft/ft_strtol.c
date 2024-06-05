@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 18:45:58 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 18:46:54 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 18:50:53 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 static int ft_isspace(char c)
 {
 	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
-
-static int ft_isdigit(char c)
-{
-	return (c >= '0' && c <= '9');
 }
 
 long ft_strtol(const char *str, char **endptr, int base)
@@ -37,17 +32,25 @@ long ft_strtol(const char *str, char **endptr, int base)
 		str++;
 	}
 	result = 0;
-	while (ft_isdigit(*str))
+	while ((*str >= '0' && *str <= '9') ||
+		   (*str >= 'a' && *str <= 'z') ||
+		   (*str >= 'A' && *str <= 'Z'))
 	{
-		if (result > (LONG_MAX - (*str - '0')) / base)
-		{
-			result = (sign == 1) ? LONG_MAX : LONG_MIN;
+		int digit;
+		if (*str >= '0' && *str <= '9')
+			digit = *str - '0';
+		else if (*str >= 'a' && *str <= 'z')
+			digit = *str - 'a' + 10;
+		else
+			digit = *str - 'A' + 10;
+		if (digit >= base)
 			break;
-		}
-		result = result * base + (*str - '0');
+		if (result > (LONG_MAX - digit) / base)
+			return (sign == 1 ? LONG_MAX : LONG_MIN);
+		result = result * base + digit;
 		str++;
 	}
-	if (endptr)
+	if (endptr != 0)
 		*endptr = (char *)str;
 	return (sign * result);
 }

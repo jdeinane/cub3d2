@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:01:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 18:45:49 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 18:54:08 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ static int validate_rgb_component(char *component)
 
 	if (*component == '\0')
 		return (-1);
-
 	value = ft_strtol(component, &endptr, 10);
 	if (*endptr != '\0' || value < 0 || value > 255)
 		return (-1);
-
 	return (value);
 }
 
