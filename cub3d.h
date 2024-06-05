@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/04 14:33:49 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/04 16:40:31 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void	parse_args(int ac, char **av);
 void 	validate_map(t_cub3d *game);
 
 // EVENTS
-int handle_keypress(int keycode, t_cub3d *game);
+int 	handle_keypress(int keycode, t_cub3d *game);
 int		handle_keyrelease(int keycode, t_cub3d *game);
 
 // RAYCASTING
