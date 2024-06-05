@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:01:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 15:11:17 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 17:52:14 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void parse_color(t_color *color, char *line)
 	{
 		free_tokens(tokens);
 		printf("Error: Invalid color format, must have exactly three RGB values\n");
+		exit(EXIT_FAILURE);
 	}
 	for (int i = 0; i < 3; i++)
 	{
