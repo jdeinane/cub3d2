@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 17:31:50 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 18:04:32 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,8 @@ void	init_cub3d(t_cub3d *game);
 // PARSING
 void	parse_file(t_cub3d *game, const char *filename);
 void	parse_textures(t_cub3d *game, char *line);
-void	parse_color(t_color *color, char *line);
-void	parse_map(t_cub3d *game, char *line);
+void	parse_color(t_cub3d *game, char *line);
+void 	parse_map(t_cub3d *game, char *line);
 void	parse_args(int ac, char **av);
 void 	validate_map(t_cub3d *game);
 

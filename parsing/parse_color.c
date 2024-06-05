@@ -6,50 +6,53 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:01:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 17:52:14 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 18:11:14 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void parse_color(t_color *color, char *line)
+static int validate_rgb_component(char *component)
 {
-	char **tokens;
-	int rgb_values[3];
+	int value;
+	char *endptr;
 
-	if (!line)
+	if (*component == '\0')
+		return -1;
+
+	value = strtol(component, &endptr, 10);
+	if (*endptr != '\0' || value < 0 || value > 255)
+		return -1;
+
+	return value;
+}
+
+void parse_color(t_cub3d *game, char *line)
+{
+	char **rgb;
+	int r, g, b;
+
+	if (!line || (line[0] != 'F' && line[0] != 'C'))
+		error_exit(game, "Error: Invalid color line format");
+	rgb = ft_split(line + 1, ',');
+	if (!rgb)
+		error_exit(game, "Error: Memory allocation failed");
+	if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
 	{
-		printf("Error: Null pointer provided for color line\n");
-		exit(EXIT_FAILURE);
+		free_tokens(rgb);
+		error_exit2(game, "Error: Incorrect number of RGB components", line);
 	}
-	tokens = ft_split(line + 2, ',');
-	int num_tokens = 0;
-	while (tokens[num_tokens])
-		num_tokens++;
-	if (num_tokens != 3)
+	r = validate_rgb_component(rgb[0]);
+	g = validate_rgb_component(rgb[1]);
+	b = validate_rgb_component(rgb[2]);
+	if (r == -1 || g == -1 || b == -1) 
 	{
-		free_tokens(tokens);
-		printf("Error: Invalid color format, must have exactly three RGB values\n");
-		exit(EXIT_FAILURE);
+		free_tokens(rgb);
+		error_exit2(game, "Error: Invalid RGB values", line);
 	}
-	for (int i = 0; i < 3; i++)
-	{
-		if (!tokens[i] || !*tokens[i])
-		{
-			free_tokens(tokens);
-			printf("Error: Invalid color format, missing RGB values\n");
-			exit(EXIT_FAILURE);
-		}
-		rgb_values[i] = ft_atoi(tokens[i]);
-		if (rgb_values[i] < 0 || rgb_values[i] > 255)
-		{
-			free_tokens(tokens);
-			printf("Error: RGB values out of bounds [0-255]\n");
-			exit(EXIT_FAILURE);
-		}
-	}
-	color->r = rgb_values[0];
-	color->g = rgb_values[1];
-	color->b = rgb_values[2];
-	free_tokens(tokens);
+	if (line[0] == 'F')
+		game->floor_color = (t_color){r, g, b};
+	else
+		game->ceiling_color = (t_color){r, g, b};
+	free_tokens(rgb);
 }

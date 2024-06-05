@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 17:15:48 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 17:20:34 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/05 18:11:54 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,14 @@ static void parse_line(t_cub3d *game, char *line, int *textures_parsed, int *col
 	{
 		if (colors_parsed[0])
 			error_exit2(game, "Error: Duplicate floor color definition", line);
-		parse_color(&game->floor_color, line);
+		parse_color(game, line);
 		colors_parsed[0] = 1;
 	}
 	else if (line[0] == 'C')
 	{
 		if (colors_parsed[1])
 			error_exit2(game, "Error: Duplicate ceiling color definition", line);
-		parse_color(&game->ceiling_color, line);
+		parse_color(game, line);
 		colors_parsed[1] = 1;
 	}
 	else
