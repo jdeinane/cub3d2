@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 19:50:55 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/11 13:12:14 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,9 +174,11 @@ void	clean_exit(t_cub3d *game);
 void	free_tokens(char **tokens);
 void	free_resources(t_cub3d *game);
 int		is_within_bounds(t_cub3d *game, double x, double y);
+bool	is_enclosed(char c);
+bool	is_valid_surrounding(char c);
 
 // GNL
-int		get_next_line(int fd, char **line);
+int get_next_line(int fd, char **line);
 
 // LIBFT
 void	*ft_memset(void *b, int c, size_t len);
