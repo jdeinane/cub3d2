@@ -6,46 +6,33 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 12:38:07 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/12 19:35:13 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/12 20:09:04 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void check_surroundings(t_cub3d *game, int x, int y)
-{
-	if (y > 0 && !is_valid_surrounding(game->map[y - 1][x]))
-		error_exit(game, "Error: Invalid player position (above).");
-	if (y < game->map_height - 1 &&
-		!is_valid_surrounding(game->map[y + 1][x]))
-		error_exit(game, "Error: Invalid player position (below).");
-	if (x > 0 && !is_valid_surrounding(game->map[y][x - 1]))
-		error_exit(game, "Error: Invalid player position (left).");
-	if (x < ft_strlen(game->map[y]) - 1 &&
-		!is_valid_surrounding(game->map[y][x + 1]))
-		error_exit(game, "Error: Invalid player position (right).");
-}
-
 static void check_player_position_surroundings(t_cub3d *game)
 {
-	int x;
-	int y;
-	int len;
-	char ch;
+	int x, y;
 
-	y = 0;
-	while (y < game->map_height)
+	for (y = 0; y < game->map_height; y++)
 	{
-		len = ft_strlen(game->map[y]);
-		x = 0;
-		while (x < len)
+		for (x = 0; x < ft_strlen(game->map[y]); x++)
 		{
-			ch = game->map[y][x];
+			char ch = game->map[y][x];
 			if (ch == 'N' || ch == 'E' || ch == 'S' || ch == 'W')
-				check_surroundings(game, x, y);
-			x++;
+			{
+				if (y > 0 && !is_valid_surrounding(game->map[y - 1][x]))
+					error_exit(game, "Error: Player starting position is not properly surrounded (above).");
+				if (y < game->map_height - 1 && !is_valid_surrounding(game->map[y + 1][x]))
+					error_exit(game, "Error: Player starting position is not properly surrounded (below).");
+				if (x > 0 && !is_valid_surrounding(game->map[y][x - 1]))
+					error_exit(game, "Error: Player starting position is not properly surrounded (left).");
+				if (x < ft_strlen(game->map[y]) - 1 && !is_valid_surrounding(game->map[y][x + 1]))
+					error_exit(game, "Error: Player starting position is not properly surrounded (right).");
+			}
 		}
-		y++;
 	}
 }
 
@@ -53,18 +40,15 @@ static void check_horizontal_boundaries(t_cub3d *game)
 {
 	int x;
 
-	x = 0;
-	while (game->map[0][x] != '\0')
+	for (x = 0; game->map[0][x] != '\0'; x++)
 	{
 		if (game->map[0][x] != '1' && game->map[0][x] != ' ')
 			error_exit(game, "Error: Map is not surrounded by walls (top row)");
-		x++;
 	}
-	while (game->map[game->map_height - 1][x] != '\0')
+	for (x = 0; game->map[game->map_height - 1][x] != '\0'; x++)
 	{
 		if (game->map[game->map_height - 1][x] != '1' && game->map[game->map_height - 1][x] != ' ')
 			error_exit(game, "Error: Map is not surrounded by walls (bottom row)");
-		x++;
 	}
 }
 
@@ -160,22 +144,6 @@ static void check_zeroes_below_in_second_to_last_row(t_cub3d *game)
 	}
 }
 
-static void check_zeroes_above_in_second_row(t_cub3d *game)
-{
-	int x;
-	int first_row_length = ft_strlen(game->map[0]);
-	int second_row_length = ft_strlen(game->map[1]);
-
-	for (x = 0; x < second_row_length; x++)
-	{
-		if (game->map[1][x] == '0')
-		{
-			if (x >= first_row_length || game->map[0][x] == ' ')
-				error_exit(game, "Error: '0' in the second row has an invalid space directly above it.");
-		}
-	}
-}
-
 void validate_map(t_cub3d *game)
 {
 	if (game->map_height < 2)
@@ -184,7 +152,6 @@ void validate_map(t_cub3d *game)
 	check_vertical_boundaries(game);
 	// check_long_row_zeroes(game);
 	check_zeroes_below_in_second_to_last_row(game);
-	check_zeroes_above_in_second_row(game);
 	check_extended_row_enclosures(game);
 	check_player_position_surroundings(game);
 }

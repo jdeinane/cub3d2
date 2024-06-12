@@ -6,22 +6,20 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:04:56 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/12 19:50:00 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/12 20:17:53 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void	add_line_to_map(t_cub3d *game, char **map_lines, \
-		char *line, int map_height)
+static void	add_line_to_map(t_cub3d *game, char **map_lines, char *line, int map_height)
 {
 	map_lines[map_height] = ft_strdup(line);
 	if (!map_lines[map_height])
 		error_exit(game, "Error: Memory allocation failed");
 }
 
-static char	**allocate_new_map_lines(t_cub3d *game, char **map_lines, \
-		int map_height)
+static char	**allocate_new_map_lines(t_cub3d *game, char **map_lines, int map_height)
 {
 	char	**new_map_lines;
 	int		i;
@@ -42,7 +40,7 @@ static char	**allocate_new_map_lines(t_cub3d *game, char **map_lines, \
 
 static bool	is_valid_map_line(const char *line, int *player_count)
 {
-	bool	valid;
+	bool valid;
 
 	valid = true;
 	while (*line)
@@ -61,28 +59,26 @@ static bool	is_valid_map_line(const char *line, int *player_count)
 	return (valid && (*player_count <= 1));
 }
 
-void	parse_map(t_cub3d *game, char *line)
+void parse_map(t_cub3d *game, char *line)
 {
-	static char	**map_lines;
-	static int	map_height;
-	static int	player_count;
-	char		**new_map_lines;
+	static char **map_lines = NULL;
+	static int map_height = 0;
+	char **new_map_lines;
+	static int player_count = 0;
 
-	if (!map_lines)
-		map_lines = NULL;
-	if (!map_height)
-		map_height = 0;
-	if (!player_count)
-		player_count = 0;
 	if (line[0] == '\0')
-		return ;
+		return;
+
 	if (!is_valid_map_line(line, &player_count))
-		error_exit2(game, "Error: Invalid characters or start positions", line);
+		error_exit2(game, "Error: Invalid map characters or multiple player start positions", line);
+
 	new_map_lines = allocate_new_map_lines(game, map_lines, map_height);
 	add_line_to_map(game, new_map_lines, line, map_height);
 	map_lines = new_map_lines;
 	map_height++;
 	game->map = map_lines;
 	game->map_height = map_height;
-	game->map_width = ft_strlen(line);
+	int line_length = ft_strlen(line);
+	if (line_length > game->map_width)
+		game->map_width = line_length;
 }
