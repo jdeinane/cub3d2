@@ -6,16 +6,16 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:01:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 18:54:08 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/12 19:12:57 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int validate_rgb_component(char *component)
+static int	validate_rgb_component(char *component)
 {
-	int value;
-	char *endptr;
+	int		value;
+	char	*endptr;
 
 	if (*component == '\0')
 		return (-1);
@@ -25,7 +25,7 @@ static int validate_rgb_component(char *component)
 	return (value);
 }
 
-void parse_color(t_cub3d *game, char *line)
+void	parse_color(t_cub3d *game, char *line)
 {
 	char	**rgb;
 	int		r;
@@ -45,7 +45,7 @@ void parse_color(t_cub3d *game, char *line)
 	r = validate_rgb_component(rgb[0]);
 	g = validate_rgb_component(rgb[1]);
 	b = validate_rgb_component(rgb[2]);
-	if (r == -1 || g == -1 || b == -1) 
+	if (r == -1 || g == -1 || b == -1)
 	{
 		free_tokens(rgb);
 		error_exit2(game, "Error: Invalid RGB values", line);

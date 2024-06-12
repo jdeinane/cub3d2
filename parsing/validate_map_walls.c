@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 12:38:07 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/11 14:21:26 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/12 17:18:21 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,25 @@ static void	check_player_position_surroundings(t_cub3d *game)
 
 static void	check_horizontal_boundaries(t_cub3d *game)
 {
-	int x;
+	int	x;
 
 	x = 0;
 	while (game->map[0][x] != '\0')
 	{
 		if (game->map[0][x] != '1' && game->map[0][x] != ' ')
-			error_exit(game, "Error: Map is not surrounded by walls (top row)");
+			error_exit(game, "Error: Map is not enclosed (top row)");
 		x++;
 	}
 	while (game->map[game->map_height - 1][x] != '\0')
 	{
-		if (game->map[game->map_height - 1][x] != '1' && game->map[game->map_height - 1][x] != ' ')
-			error_exit(game, "Error: Map is not surrounded by walls (bottom row)");
+		if (game->map[game->map_height - 1][x] != '1' && \
+			game->map[game->map_height - 1][x] != ' ')
+			error_exit(game, "Error: Map is not enclosed (bottom row)");
 		x++;
 	}
 }
 
-static void check_vertical_boundaries(t_cub3d *game)
+static void	check_vertical_boundaries(t_cub3d *game)
 {
 	int y, x, row_length;
 
@@ -89,24 +90,8 @@ static void check_vertical_boundaries(t_cub3d *game)
 			if (game->map[y][x] != ' ')
 				break ;
 		}
-		if (game->map[y][x] == '0')
-			error_exit(game, "Error: Map has '0' before spaces at the end, not properly surrounded by walls.");
 	}
 }
-
-// static void check_long_row_zeroes(t_cub3d *game)
-// {
-// 	int x, y;
-
-// 	for (y = 1; y < game->map_height - 1; y++)
-// 	{
-// 		for (x = ft_strlen(game->map[0]); x < ft_strlen(game->map[y]); x++)
-// 		{
-// 			if (game->map[y][x] == '0' && (game->map[y - 1][x] != '1' || game->map[y + 1][x] != '1'))
-// 				error_exit(game, "Error: '0' in extended row must have '1' or space both above and below");
-// 		}
-// 	}
-// }
 
 static void check_extended_row_enclosures(t_cub3d *game)
 {
@@ -182,7 +167,6 @@ void validate_map(t_cub3d *game)
 		error_exit(game, "Error: Map must have at least two rows");
 	check_horizontal_boundaries(game);
 	check_vertical_boundaries(game);
-	// check_long_row_zeroes(game);
 	check_zeroes_below_in_second_to_last_row(game);
 	check_zeroes_above_in_second_row(game);
 	check_extended_row_enclosures(game);

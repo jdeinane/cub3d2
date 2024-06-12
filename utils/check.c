@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 22:19:42 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/11 13:11:46 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/12 19:16:19 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	is_within_bounds(t_cub3d *game, double x, double y)
 
 bool	is_enclosed(char c)
 {
-	return c == '1' || c == ' ';
+	return (c == '1' || c == ' ');
 }
 
 bool	is_valid_surrounding(char c)
 {
-	return c == '0' || c == '1';
+	return (c == '0' || c == '1');
 }
