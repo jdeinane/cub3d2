@@ -6,14 +6,14 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:04:56 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/12 19:21:23 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/12 19:50:00 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
 static void	add_line_to_map(t_cub3d *game, char **map_lines, \
-			char *line, int map_height)
+		char *line, int map_height)
 {
 	map_lines[map_height] = ft_strdup(line);
 	if (!map_lines[map_height])
@@ -21,7 +21,7 @@ static void	add_line_to_map(t_cub3d *game, char **map_lines, \
 }
 
 static char	**allocate_new_map_lines(t_cub3d *game, char **map_lines, \
-			int map_height)
+		int map_height)
 {
 	char	**new_map_lines;
 	int		i;
@@ -65,16 +65,19 @@ void	parse_map(t_cub3d *game, char *line)
 {
 	static char	**map_lines;
 	static int	map_height;
-	char		**new_map_lines;
 	static int	player_count;
+	char		**new_map_lines;
 
-	map_lines = NULL;
-	map_height = 0;
-	player_count = 0;
+	if (!map_lines)
+		map_lines = NULL;
+	if (!map_height)
+		map_height = 0;
+	if (!player_count)
+		player_count = 0;
 	if (line[0] == '\0')
 		return ;
 	if (!is_valid_map_line(line, &player_count))
-		error_exit2(game, "Error: Invalid map characters", line);
+		error_exit2(game, "Error: Invalid characters or start positions", line);
 	new_map_lines = allocate_new_map_lines(game, map_lines, map_height);
 	add_line_to_map(game, new_map_lines, line, map_height);
 	map_lines = new_map_lines;
