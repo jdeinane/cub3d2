@@ -6,7 +6,7 @@
 #    By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 17:17:38 by jubaldo           #+#    #+#              #
-#    Updated: 2024/06/05 19:51:05 by jubaldo          ###   ########.fr        #
+#    Updated: 2024/06/12 21:00:01 by jubaldo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRCS		=	events/handle_keypress.c 	\
 				parsing/parse_map.c \
 				parsing/parse_texture.c \
 				parsing/validate_map_walls.c \
+				parsing/check_map.c \
+				parsing/check_map2.c \
 				player/linear_moves.c \
 				player/rotation_moves.c \
 				player/update_player.c \

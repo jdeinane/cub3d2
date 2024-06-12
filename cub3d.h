@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/11 13:12:14 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/12 21:04:09 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,13 @@ void	parse_color(t_cub3d *game, char *line);
 void	parse_map(t_cub3d *game, char *line);
 void	parse_args(int ac, char **av);
 void	validate_map(t_cub3d *game);
+
+// CHECK MAP
+void	check_vertical_boundaries(t_cub3d *game);
+void	check_player_position_surroundings(t_cub3d *game);
+void	check_zeroes_below_in_second_to_last_row(t_cub3d *game);
+void	check_extended_row_enclosures(t_cub3d *game);
+void	check_horizontal_boundaries(t_cub3d *game);
 
 // EVENTS
 int		handle_keypress(int keycode, t_cub3d *game);
