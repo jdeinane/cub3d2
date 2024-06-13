@@ -6,7 +6,7 @@
 #    By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 17:17:38 by jubaldo           #+#    #+#              #
-#    Updated: 2024/06/12 21:00:01 by jubaldo          ###   ########.fr        #
+#    Updated: 2024/06/13 17:39:24 by jubaldo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,10 @@ SRCS		=	events/handle_keypress.c 	\
 				utils/check.c \
 				utils/exit.c \
 				utils/free.c \
+				utils/handle_ct.c \
+				utils/handle_parsing.c \
+				utils/set_player.c \
+				utils/set_position.c \
 				main.c
 
 OBJS_DIR	=	obj

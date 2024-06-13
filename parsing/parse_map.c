@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:04:56 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/12 20:22:00 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/13 17:16:55 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	parse_map(t_cub3d *game, char *line)
 	if (line[0] == '\0')
 		return ;
 	if (!is_valid_map_line(line, &player_count))
-		error_exit2(game, "Error: Invalid map characters", line);
+		error_exit2(game, "Error: Invalid map characters/configuration", line);
 	new_map_lines = allocate_new_map_lines(game, map_lines, map_height);
 	add_line_to_map(game, new_map_lines, line, map_height);
 	map_lines = new_map_lines;

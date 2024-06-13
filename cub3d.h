@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/12 21:04:09 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/13 18:04:39 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,12 @@ typedef struct s_draw_params
 	double	wall_x;
 }	t_draw_params;
 
+typedef struct s_parse_state {
+	int		parsing_map;
+	int		textures_parsed[4];
+	int		colors_parsed[2];
+}	t_parse_state;
+
 typedef struct s_cub3d {
 	void		*mlx;
 	void		*win;
@@ -183,9 +189,30 @@ void	free_resources(t_cub3d *game);
 int		is_within_bounds(t_cub3d *game, double x, double y);
 bool	is_enclosed(char c);
 bool	is_valid_surrounding(char c);
+void	set_parsing_map_flag(int *parsing_map, char *line);
+void	handle_texture_parsing(t_cub3d *game, char *line, \
+		t_parse_state *state, int index);
+void	handle_color_parsing(t_cub3d *game, char *line, \
+		t_parse_state *state, int index);
+void	check_missing_definitions(t_cub3d *game, t_parse_state *state);
+void	handle_parsing(t_cub3d *game, char *line, t_parse_state *state);
+void	process_line(t_cub3d *game, char *line, t_parse_state *state);
+void	process_remaining_line(t_cub3d *game, char *line, t_parse_state *state);
+void	process_file_lines(t_cub3d *game, int fd, t_parse_state *state);
+void	set_north_direction(t_cub3d *game);
+void	set_south_direction(t_cub3d *game);
+void	set_east_direction(t_cub3d *game);
+void	set_west_direction(t_cub3d *game);
+void	set_player_direction(t_cub3d *game, char direction);
+void	set_player_position(t_cub3d *game, int x, int y, char direction);
+int		find_initial_position(t_cub3d *game, int *x, int *y);
+void	init_player_position(t_cub3d *game);
+void	parse_line(t_cub3d *game, char *line, t_parse_state *state);
+char	*trim_leading_whitespace(char *line);
+void	open_file(t_cub3d *game, const char *filename, int *fd);
 
 // GNL
-int get_next_line(int fd, char **line);
+int		get_next_line(int fd, char **line);
 
 // LIBFT
 void	*ft_memset(void *b, int c, size_t len);
