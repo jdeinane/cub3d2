@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:01:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/12 19:12:57 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/06/14 14:56:00 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ static int	validate_rgb_component(char *component)
 	return (value);
 }
 
+static void	check_rgb_components(char **rgb, char *line, t_cub3d *game)
+{
+	if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
+	{
+		free_tokens(rgb);
+		error_exit2(game, "Error: Incorrect number of RGB components", line);
+	}
+}
+
 void	parse_color(t_cub3d *game, char *line)
 {
 	char	**rgb;
@@ -37,11 +46,7 @@ void	parse_color(t_cub3d *game, char *line)
 	rgb = ft_split(line + 1, ',');
 	if (!rgb)
 		error_exit(game, "Error: Memory allocation failed");
-	if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-	{
-		free_tokens(rgb);
-		error_exit2(game, "Error: Incorrect number of RGB components", line);
-	}
+	check_rgb_components(rgb, line, game);
 	r = validate_rgb_component(rgb[0]);
 	g = validate_rgb_component(rgb[1]);
 	b = validate_rgb_component(rgb[2]);
