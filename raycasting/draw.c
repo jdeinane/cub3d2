@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 20:20:05 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/05/27 22:12:02 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/07/15 18:23:03 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static int	get_texture_index(t_ray *ray)
 	if (ray->side == 0)
 	{
 		if (ray->ray_dir_x > 0)
-			return (0);
+			return (3);
 		else
-			return (1);
+			return (2);
 	}
 	else
 	{
 		if (ray->ray_dir_y > 0)
-			return (2);
+			return (1);
 		else
-			return (3);
+			return (0);
 	}
 }
 

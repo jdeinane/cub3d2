@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 22:05:24 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/03 19:20:05 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/07/15 16:47:01 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,6 @@ static void	init_mlx(t_cub3d *game)
 
 void	init_cub3d(t_cub3d *game)
 {
-	char	*texture_paths[NUM_TEXTURES];
-
-	texture_paths[0] = PATH_NORTH;
-	texture_paths[1] = PATH_SOUTH;
-	texture_paths[2] = PATH_EAST;
-	texture_paths[3] = PATH_WEST;
 	game->mlx = NULL;
 	game->win = NULL;
 	game->img = NULL;
