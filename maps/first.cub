@@ -1,5 +1,5 @@
 NO textures/home/lamp.xpm
-SO textures/home/lamp.xpm
+SO textures/home/window.xpm
 WE textures/home/wall.xpm
 EA textures/home/library.xpm
 
@@ -11,7 +11,7 @@ C 135,206,235
 101001
 101101
 111101
-1000N1
+1000S1
 111111
  
  
