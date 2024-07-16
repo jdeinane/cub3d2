@@ -1,10 +1,10 @@
-NO textures/test/east.xpm
-SO textures/test/east.xpm
-WE textures/test/east.xpm
-EA textures/test/east.xpm
+NO textures/dungeon/door.xpm
+SO textures/dungeon/box_wall.xpm
+WE textures/dungeon/wall.xpm
+EA textures/dungeon/gate.xpm
 
-F 164,169,20
-C 153,204,144
+F 76,76,76
+C 99,99,99
 
 111111111111111111111111111111111111111111111111111
 100100000000000000000001010111110000000000000000001

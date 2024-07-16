@@ -1,10 +1,10 @@
-NO textures/test/north.xpm
-SO textures/test/south.xpm
-WE textures/test/west.xpm
-EA textures/test/east.xpm
+NO textures/home/window.xpm
+SO textures/home/library.xpm
+WE textures/home/wall.xpm
+EA textures/home/lamp.xpm
 
-F 164,169,20
-C 153,204,255
+F 132,32,53
+C 244,101,45
 
 111111111111111111111
 101000001000000000001

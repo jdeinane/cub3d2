@@ -1,10 +1,10 @@
 F 76,76,76
 C 99,99,99
 
-NO textures/test/north.xpm
-SO textures/test/south.xpm
-WE textures/test/west.xpm
-EA textures/test/east.xpm
+NO textures/dungeon/box_wall.xpm
+SO textures/dungeon/door.xpm
+WE textures/dungeon/gate.xpm
+EA textures/dungeon/wall.xpm
 
 1111111111111111111
 10W1001001001000001
