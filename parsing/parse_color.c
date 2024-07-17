@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:01:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/14 14:56:00 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/07/17 15:41:13 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	validate_rgb_component(char *component)
 
 static void	check_rgb_components(char **rgb, char *line, t_cub3d *game)
 {
-	if (!rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
+	if (!rgb[0] || !rgb[1] || !rgb[2])
 	{
 		free_tokens(rgb);
 		error_exit2(game, "Error: Incorrect number of RGB components", line);

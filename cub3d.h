@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/07/15 16:47:06 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/07/17 15:43:07 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 
 typedef struct s_color {
 	int	r;
-	int	b;
 	int	g;
+	int	b;
 }	t_color;
 
 typedef struct s_player {
