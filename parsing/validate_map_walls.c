@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 12:38:07 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/07/19 19:40:37 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/07/19 22:50:28 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,40 @@ void check_for_multiple_sections(t_cub3d *game)
 	}
 }
 
+static void check_unprotected_spaces(t_cub3d *game)
+{
+	for (int y = 0; y < game->map_height; y++)
+	{
+		int length = ft_strlen(game->map[y]);
+		for (int x = 0; x < length; x++)
+		{
+			if (game->map[y][x] == '0')
+			{
+				if (x > 0 && isspace(game->map[y][x - 1]))
+				{
+					if (x == 1 || !is_valid_surrounding(game->map[y][x - 2]))
+						error_exit(game, "Error: Unprotected space to the left of '0'.");
+				}
+				if (x < length - 1 && isspace(game->map[y][x + 1]))
+				{
+					if (x == length - 2 || !is_valid_surrounding(game->map[y][x + 2]))
+						error_exit(game, "Error: Unprotected space to the right of '0'.");
+				}
+				if (y > 0 && x < ft_strlen(game->map[y - 1]) && isspace(game->map[y - 1][x]))
+				{
+					if (y == 1 || !is_valid_surrounding(game->map[y - 2][x]))
+						error_exit(game, "Error: Unprotected space above '0'.");
+				}
+				if (y < game->map_height - 1 && x < ft_strlen(game->map[y + 1]) && isspace(game->map[y + 1][x]))
+				{
+					if (y == game->map_height - 2 || !is_valid_surrounding(game->map[y + 2][x]))
+						error_exit(game, "Error: Unprotected space below '0'.");
+				}
+			}
+		}
+	}
+}
+
 void validate_map(t_cub3d *game)
 {
 	if (game->map_height < 2)
@@ -87,4 +121,5 @@ void validate_map(t_cub3d *game)
 	check_zeroes_below_in_second_to_last_row(game);
 	check_extended_row_enclosures(game);
 	check_for_multiple_sections(game);
+	check_unprotected_spaces(game);
 }

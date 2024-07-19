@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:04:56 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/07/19 19:53:55 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/07/19 21:38:24 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,14 @@ static bool	is_valid_map_line(const char *line, int *player_count)
 	return (valid && (*player_count <= 1));
 }
 
-void	parse_map(t_cub3d *game, char *line)
+void parse_map(t_cub3d *game, char *line)
 {
-	static char	**map_lines;
-	static int	map_height;
-	static int	player_count;
-	char		**new_map_lines;
-	int			line_length;
+	static char **map_lines;
+	static int map_height;
+	static int player_count;
+	static bool map_ended = false;
+	char **new_map_lines;
+	int line_length;
 
 	if (!map_lines)
 		map_lines = NULL;
@@ -76,7 +77,13 @@ void	parse_map(t_cub3d *game, char *line)
 	if (!player_count)
 		player_count = 0;
 	if (line[0] == '\0')
-		return ;
+	{
+		if (map_height > 0)
+			map_ended = true;
+		return;
+	}
+	if (map_ended && line[0] != '\0')
+		error_exit(game, "Error: Discontinuous map (empty line detected within the map).");
 	if (!is_valid_map_line(line, &player_count))
 		error_exit2(game, "Error: Invalid map characters/configuration", line);
 	new_map_lines = allocate_new_map_lines(game, map_lines, map_height);
