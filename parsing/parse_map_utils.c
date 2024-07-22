@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 18:04:56 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/07/22 16:03:44 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/07/22 16:14:27 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	handle_map_line(t_cub3d *game, char *line, t_map_info *map_info)
 		return ;
 	}
 	if (map_info->map_ended && line[0] != '\0')
-		error_exit(game, "Error: Discontinuous map/Wrong config");
+		error_exit2(game, "Error: Discontinuous map/Wrong config", line);
 	if (!is_valid_map_line(line, &map_info->player_count))
 		error_exit2(game, "Error: Invalid map/config", line);
 	new_map_lines = allocate_new_map_lines(game,
