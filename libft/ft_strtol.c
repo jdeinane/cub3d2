@@ -6,13 +6,13 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 18:45:58 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/06/05 19:20:50 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/07/22 16:07:32 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int	ft_isspace(char c)
+int	ft_isspace(char c)
 {
 	return (c == ' ' || (c >= '\t' && c <= '\r'));
 }

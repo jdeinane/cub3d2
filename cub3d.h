@@ -6,7 +6,7 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:17:11 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/07/17 15:43:07 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/07/22 16:09:05 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,14 @@ typedef struct s_parse_state {
 	int		colors_parsed[2];
 }	t_parse_state;
 
+typedef struct s_map_info
+{
+	char	**map_lines;
+	int		map_height;
+	int		player_count;
+	bool	map_ended;
+}	t_map_info;
+
 typedef struct s_cub3d {
 	void		*mlx;
 	void		*win;
@@ -142,6 +150,13 @@ void	parse_color(t_cub3d *game, char *line);
 void	parse_map(t_cub3d *game, char *line);
 void	parse_args(int ac, char **av);
 void	validate_map(t_cub3d *game);
+void	add_line_to_map(t_cub3d *game, char **map_lines,
+			char *line, int map_height);
+char	**allocate_new_map_lines(t_cub3d *game, char **map_lines,
+			int map_height);
+bool	is_valid_map_line(const char *line, int *player_count);
+void	initialize_static_variables(t_map_info *map_info);
+void	handle_map_line(t_cub3d *game, char *line, t_map_info *map_info);
 
 // CHECK MAP
 void	check_vertical_boundaries(t_cub3d *game);
@@ -149,6 +164,18 @@ void	check_player_position_surroundings(t_cub3d *game);
 void	check_zeroes_below_in_second_to_last_row(t_cub3d *game);
 void	check_extended_row_enclosures(t_cub3d *game);
 void	check_horizontal_boundaries(t_cub3d *game);
+bool	is_row_completely_empty(const char *row);
+void	check_left_boundary2(t_cub3d *game, int y);
+void	check_right_boundary2(t_cub3d *game, int y);
+void	check_top_bottom_boundary2(t_cub3d *game, int y, int len);
+void	validate_section(t_cub3d *game, int start, int end);
+void	process_section(t_cub3d *game, bool *in_section,
+			int *current_section_start, int y);
+void	start_new_section(bool *in_section,
+			int *current_section_start, int y);
+void	check_for_multiple_sections(t_cub3d *game);
+void	check_left_space(t_cub3d *game, int y, int x);
+void	check_right_space(t_cub3d *game, int y, int x, int length);
 
 // EVENTS
 int		handle_keypress(int keycode, t_cub3d *game);
@@ -224,5 +251,6 @@ char	*ft_strchr(const char *s, int c);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_strtok_r(char *str, const char *delim, char **saveptr);
 long	ft_strtol(const char *str, char **endptr, int base);
+int		ft_isspace(char c);
 
 #endif

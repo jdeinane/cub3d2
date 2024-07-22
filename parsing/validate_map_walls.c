@@ -6,113 +6,55 @@
 /*   By: jubaldo <jubaldo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 12:38:07 by jubaldo           #+#    #+#             */
-/*   Updated: 2024/07/19 22:50:28 by jubaldo          ###   ########.fr       */
+/*   Updated: 2024/07/22 15:57:55 by jubaldo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static bool is_row_completely_empty(const char *row)
+static void	check_vertical_spaces(t_cub3d *game, int y, int x)
 {
-	while (*row)
+	if (y > 0 && x < ft_strlen(game->map[y - 1]) && \
+		ft_isspace(game->map[y - 1][x]))
 	{
-		if (!isspace((unsigned char)*row))
-			return false;
-		row++;
+		if (y == 1 || !is_valid_surrounding(game->map[y - 2][x]))
+			error_exit(game, "Error: Unprotected space above '0'.");
 	}
-	return true;
-}
-
-static void validate_section(t_cub3d *game, int start, int end)
-{
-	int max_length = 0;
-
-	for (int y = start; y <= end; y++)
+	if (y < game->map_height - 1 && x < ft_strlen(game->map[y + 1]) && \
+		ft_isspace(game->map[y + 1][x]))
 	{
-		int length = ft_strlen(game->map[y]);
-		if (length > max_length)
-			max_length = length;
-	}
-	for (int y = start; y <= end; y++)
-	{
-		int length = ft_strlen(game->map[y]);
-
-		if (y == start || y == end)
-		{
-			for (int x = 0; x < length; x++)
-			{
-				if (game->map[y][x] != '1' && game->map[y][x] != ' ')
-					error_exit(game, "Error: Section of the map is not properly enclosed.");
-			}
-		}
-		if (length > 0 && (game->map[y][0] != '1' && game->map[y][0] != ' '))
-			error_exit(game, "Error: Section left boundary is not properly enclosed.");
-		if (length > 0 && (game->map[y][length - 1] != '1' && game->map[y][length - 1] != ' '))
-			error_exit(game, "Error: Section right boundary is not properly enclosed.");
+		if (y == game->map_height - 2 || \
+			!is_valid_surrounding(game->map[y + 2][x]))
+			error_exit(game, "Error: Unprotected space below '0'.");
 	}
 }
 
-void check_for_multiple_sections(t_cub3d *game)
+static void	check_unprotected_spaces(t_cub3d *game)
 {
-	int current_section_start = -1;
-	bool in_section = false;
+	int	y;
+	int	x;
+	int	len;
 
-	for (int y = 0; y <= game->map_height; y++)
+	y = 0;
+	while (y < game->map_height)
 	{
-		if (y == game->map_height || is_row_completely_empty(game->map[y]))
-		{
-			if (in_section)
-			{
-				validate_section(game, current_section_start, y - 1);
-				in_section = false;
-			}
-		}
-		else
-		{
-			if (!in_section)
-			{
-				current_section_start = y;
-				in_section = true;
-			}
-		}
-	}
-}
-
-static void check_unprotected_spaces(t_cub3d *game)
-{
-	for (int y = 0; y < game->map_height; y++)
-	{
-		int length = ft_strlen(game->map[y]);
-		for (int x = 0; x < length; x++)
+		len = ft_strlen(game->map[y]);
+		x = 0;
+		while (x < len)
 		{
 			if (game->map[y][x] == '0')
 			{
-				if (x > 0 && isspace(game->map[y][x - 1]))
-				{
-					if (x == 1 || !is_valid_surrounding(game->map[y][x - 2]))
-						error_exit(game, "Error: Unprotected space to the left of '0'.");
-				}
-				if (x < length - 1 && isspace(game->map[y][x + 1]))
-				{
-					if (x == length - 2 || !is_valid_surrounding(game->map[y][x + 2]))
-						error_exit(game, "Error: Unprotected space to the right of '0'.");
-				}
-				if (y > 0 && x < ft_strlen(game->map[y - 1]) && isspace(game->map[y - 1][x]))
-				{
-					if (y == 1 || !is_valid_surrounding(game->map[y - 2][x]))
-						error_exit(game, "Error: Unprotected space above '0'.");
-				}
-				if (y < game->map_height - 1 && x < ft_strlen(game->map[y + 1]) && isspace(game->map[y + 1][x]))
-				{
-					if (y == game->map_height - 2 || !is_valid_surrounding(game->map[y + 2][x]))
-						error_exit(game, "Error: Unprotected space below '0'.");
-				}
+				check_left_space(game, y, x);
+				check_right_space(game, y, x, len);
+				check_vertical_spaces(game, y, x);
 			}
+			x++;
 		}
+		y++;
 	}
 }
 
-void validate_map(t_cub3d *game)
+void	validate_map(t_cub3d *game)
 {
 	if (game->map_height < 2)
 		error_exit(game, "Error: Map must have at least two rows");
